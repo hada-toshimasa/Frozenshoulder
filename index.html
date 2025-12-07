@@ -3,279 +3,178 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>五十肩マニュアル 完全版テスト</title>
+<title>五十肩マニュアル 完全攻略マスター（上級編）</title>
 <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", YuGothic, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; }
-    .container { background-color: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; }
-    h1 { text-align: center; color: #0056b3; font-size: 1.5em; margin-bottom: 20px; }
-    .reset-btn-container { position: absolute; top: 20px; right: 20px; }
-    .btn-reset { background-color: #6c757d; color: white; border: none; padding: 5px 10px; font-size: 0.8em; border-radius: 4px; cursor: pointer; }
-    .status-bar { display: flex; justify-content: space-between; background: #e9ecef; padding: 10px 15px; border-radius: 8px; margin-bottom: 20px; font-weight: bold; font-size: 0.9em; }
-    .question-box { font-size: 1.1em; font-weight: bold; margin-bottom: 20px; padding: 10px; border-left: 5px solid #0056b3; background-color: #f8f9fa; }
-    .options-grid { display: flex; flex-direction: column; gap: 12px; }
-    .option-btn { background-color: #fff; border: 2px solid #dde2e6; padding: 15px; border-radius: 8px; cursor: pointer; text-align: left; font-size: 1em; transition: all 0.2s; }
-    .option-btn:hover { background-color: #f1f8ff; border-color: #0056b3; }
+    body { font-family: "Helvetica Neue", Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; margin: 0; padding: 20px; }
+    .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); position: relative; }
+    h1 { text-align: center; color: #0056b3; margin-bottom: 25px; font-size: 1.8em; border-bottom: 2px solid #eee; padding-bottom: 15px; }
+    .reset-btn { position: absolute; top: 20px; right: 20px; background: #95a5a6; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85em; transition: 0.3s; }
+    .reset-btn:hover { background: #7f8c8d; }
+    .status-bar { background: #e3f2fd; padding: 12px 20px; border-radius: 8px; display: flex; justify-content: space-between; color: #0056b3; font-weight: bold; margin-bottom: 25px; }
+    .question-box { background: #f0f8ff; border-left: 6px solid #0056b3; padding: 20px; margin-bottom: 25px; font-size: 1.15em; font-weight: bold; line-height: 1.5; }
+    .option-btn { display: block; width: 100%; padding: 15px; margin-bottom: 12px; background: #fff; border: 2px solid #d6eaf8; border-radius: 8px; text-align: left; cursor: pointer; transition: all 0.2s; font-size: 1em; color: #444; }
+    .option-btn:hover { background-color: #e3f2fd; border-color: #0056b3; }
     .option-btn.correct { background-color: #d4edda; border-color: #28a745; color: #155724; }
     .option-btn.incorrect { background-color: #f8d7da; border-color: #dc3545; color: #721c24; }
-    .feedback { margin-top: 20px; padding: 15px; border-radius: 8px; display: none; }
-    .feedback-correct { background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
-    .feedback-incorrect { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
-    .source-ref { display: block; margin-top: 10px; font-size: 0.85em; color: #666; text-align: right; font-style: italic; }
-    .btn-next { display: block; width: 100%; padding: 15px; margin-top: 20px; background-color: #0056b3; color: white; border: none; border-radius: 8px; font-size: 1.1em; cursor: pointer; opacity: 0.5; pointer-events: none; }
-    .btn-next.active { opacity: 1; pointer-events: auto; }
-    #result-screen { display: none; text-align: center; }
-    .score-circle { width: 150px; height: 150px; background: #0056b3; color: white; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 20px auto; }
-    .score-num { font-size: 3em; font-weight: bold; line-height: 1; }
+    .feedback { display: none; margin-top: 20px; padding: 20px; border-radius: 8px; background: #f1f8e9; border: 1px solid #c8e6c9; color: #2e7d32; animation: fadeIn 0.3s; }
+    .feedback.error { background: #fdecea; border: 1px solid #fadbd8; color: #7b241c; }
+    .source-ref { display: block; margin-top: 8px; font-size: 0.85em; color: #666; text-align: right; font-style: italic; }
+    .next-btn { display: block; width: 100%; padding: 18px; background: #0056b3; color: #fff; border: none; border-radius: 8px; font-size: 1.2em; font-weight: bold; cursor: pointer; margin-top: 25px; opacity: 0.6; pointer-events: none; transition: 0.3s; }
+    .next-btn.active { opacity: 1; pointer-events: auto; }
+    .next-btn:hover { background-color: #004080; }
+    #result-screen { display: none; text-align: center; padding: 20px; }
+    .score-circle { width: 150px; height: 150px; background: #0056b3; color: #fff; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 30px auto; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    .score-num { font-size: 3.5em; font-weight: bold; line-height: 1; }
+    .score-label { font-size: 0.9em; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
 <div class="container">
-    <div id="start-screen" style="text-align: center;">
-        <h1>五十肩マニュアル<br>実力確認テスト</h1>
-        <p>全203問のプールから<br>ランダムに30問出題されます。</p>
-        <p style="font-size: 0.9em; color: #666;">収録問題数: <span id="pool-count">...</span>問</p>
-        <button class="btn-next active" onclick="startQuiz()">テストを開始する</button>
+    <div id="start-screen" style="text-align: center; padding: 40px 0;">
+        <h1 style="border: none;">五十肩マニュアル<br>完全攻略マスター（上級編）</h1>
+        <p style="font-size: 1.1em; margin-bottom: 30px;">全250問のプールから<br>ランダムに30問出題されます。</p>
+        <p style="font-size: 0.9em; color: #7f8c8d; margin-bottom: 40px;">合格ライン: 80%以上</p>
+        <button class="next-btn active" onclick="startQuiz()">試験を開始する</button>
     </div>
+
     <div id="quiz-screen" style="display: none;">
-        <div class="reset-btn-container"><button class="btn-reset" onclick="resetQuiz()">最初に戻る</button></div>
+        <button class="reset-btn" onclick="resetQuiz()">最初に戻る</button>
         <h1>五十肩クイズ</h1>
-        <div class="status-bar"><span id="progress">問 1 / 30</span><span id="current-score">正解数: 0</span></div>
-        <div class="question-box" id="question-text"></div>
-        <div class="options-grid" id="options-container"></div>
-        <div class="feedback" id="feedback-area"></div>
-        <button class="btn-next" id="next-btn" onclick="nextQuestion()">次の問題へ</button>
+        <div class="status-bar">
+            <span id="progress">問 1 / 30</span>
+            <span id="score">正解数: 0</span>
+        </div>
+        <div id="question" class="question-box"></div>
+        <div id="options"></div>
+        <div id="feedback" class="feedback"></div>
+        <button id="next-btn" class="next-btn" onclick="nextQuestion()">次の問題へ</button>
     </div>
+
     <div id="result-screen">
-        <h2>テスト終了</h2>
-        <div class="score-circle"><span class="score-num" id="final-score">0</span><span class="score-label">点 / 30点</span></div>
-        <p id="result-comment"></p>
-        <button class="btn-next active" onclick="resetQuiz(true)">もう一度挑戦する</button>
+        <h2>試験終了</h2>
+        <div class="score-circle">
+            <span class="score-num" id="final-score">0</span>
+            <span class="score-label">点 / 30点</span>
+        </div>
+        <p id="result-comment" style="font-size: 1.2em; margin: 20px 0;"></p>
+        <button class="next-btn active" onclick="resetQuiz(true)">もう一度挑戦する</button>
     </div>
 </div>
+
 <script>
-// --- パート1：問題データ前半（1-100） ---
-const questionsPart1 = [
-    { q: "五十肩の好発年齢として正しいものは？", options: ["20~30代", "40~50代", "60~70代", "70代以降"], correct: 1, rationale: "男女問わず40~50代で好発します。", source: "2ページ" },
-    { q: "糖尿病患者の五十肩発生率は？", options: ["低い", "変わらない", "かなり高い", "不明"], correct: 2, rationale: "糖尿病患者は発生率がかなり高く、患者の10-20%が五十肩というデータがあります。", source: "2ページ" },
-    { q: "五十肩の定義において、診断されるタイミングは？", options: ["発症直後", "痛みのピーク時", "期間を過ぎて振り返り初めて診断される", "手術後"], correct: 2, rationale: "ある期間を過ぎて治癒することが定義であり、振り返って初めて診断されます。", source: "3ページ" },
-    { q: "五十肩の病期分類に含まれないものは？", options: ["疼痛期", "拘縮期", "回復期", "緩解期"], correct: 2, rationale: "「疼痛期」「拘縮期」「緩解期」の3つに分類されます。", source: "4ページ" },
-    { q: "疼痛期のリスク管理として最も重要なのは？", options: ["積極的なストレッチ", "安静", "筋トレ", "マッサージ"], correct: 1, rationale: "むやみに関節を動かさずに安静を心がけます。", source: "5ページ" },
-    { q: "拘縮期の特徴として正しいのは？", options: ["夜間痛消失", "安静時痛増強", "可動域制限を認めるが炎症は軽減", "可動域正常化"], correct: 2, rationale: "炎症は軽減してきますが、組織が硬くなり可動域制限を認めます。", source: "5ページ" },
-    { q: "緩解期における炎症性疼痛の状態は？", options: ["強い", "増悪", "消失", "夜間のみ"], correct: 2, rationale: "緩解期では安静時痛などの炎症性疼痛はほぼ消失します。", source: "5ページ" },
-    { q: "第2肩関節を構成しない組織は？", options: ["烏口肩峰アーチ", "肩峰下滑液包", "関節唇", "腱板"], correct: 2, rationale: "関節唇は第1肩関節の構成要素です。", source: "60ページ" },
-    { q: "腱板疎部を構成する筋腱の間隙は？", options: ["棘上筋と棘下筋", "棘下筋と小円筋", "棘上筋と肩甲下筋", "小円筋と大円筋"], correct: 2, rationale: "棘上筋腱と肩甲下筋腱の間の隙間を指します。", source: "61ページ" },
-    { q: "ゼロ・ポジションの説明で正しいのは？", options: ["下垂位", "肩甲骨面上で約150°挙上", "外転90°", "結帯動作"], correct: 1, rationale: "肩甲骨面上で約150°挙上し、上腕骨長軸と肩甲棘が一致する肢位です。", source: "65ページ" },
-    { q: "肩甲上腕関節と肩甲胸郭関節の可動域比率は？", options: ["1:1", "2:1", "3:1", "4:1"], correct: 1, rationale: "約2:1の比率で動きます。", source: "72ページ" },
-    { q: "凹凸の法則：肩関節外転時に骨頭（凸）はどう滑る？", options: ["上方", "下方", "前方", "後方"], correct: 1, rationale: "骨運動が上方（外転）へ向かう時、骨頭は下方へ滑ります。", source: "57ページ" },
-    { q: "棘上筋の作用として「外転」以外の重要な機能は？", options: ["下方牽引", "支点形成（求心力）", "肩甲骨挙上", "内旋"], correct: 1, rationale: "骨頭を関節窩に引き寄せ、安定した軸を作ります。", source: "88ページ" },
-    { q: "棘下筋上部線維が最も伸張される肢位は？", options: ["1st内旋", "2nd内旋", "3rd内旋", "1st外旋"], correct: 0, rationale: "第1肢位（下垂位）での内旋で伸張します。", source: "94ページ" },
-    { q: "小円筋が構成し、腋窩神経絞扼に関与する間隙は？", options: ["スカルパ三角", "QLS", "聴診三角", "手根管"], correct: 1, rationale: "クアドリラテラルスペース（QLS）を構成します。", source: "100ページ" },
-    { q: "肩甲下筋上部線維が癒着しやすい靭帯は？", options: ["烏口肩峰靭帯", "烏口上腕靭帯", "肩鎖靭帯", "円錐靭帯"], correct: 1, rationale: "烏口上腕靭帯と癒着していることが多いです。", source: "106ページ" },
-    { q: "烏口腕筋を貫通する神経は？", options: ["正中神経", "尺骨神経", "橈骨神経", "筋皮神経"], correct: 3, rationale: "筋皮神経が貫通しており、圧迫で前腕外側面に痛みが出ます。", source: "145ページ" },
-    { q: "夜間痛対応で患側の腕の下にタオルを入れる目的は？", options: ["屈曲促進", "過伸展・過内転の防止", "肘伸展", "血流遮断"], correct: 1, rationale: "過伸展や過内転による上方支持組織へのストレスを防ぎます。", source: "12ページ" },
-    { q: "結髪動作に必要な可動域の目安は？", options: ["屈曲45°外旋45°", "屈曲70°外旋70°", "屈曲90°外旋90°", "屈曲120°外旋90°"], correct: 1, rationale: "屈曲70°以上、外旋70°以上が必要です。", source: "42ページ" },
-    { q: "結帯動作はどのような運動の複合か？", options: ["屈曲・外転・外旋", "伸展・過内旋", "屈曲・内転・内旋", "水平屈曲・外旋"], correct: 1, rationale: "伸展と過内旋の複合運動です。", source: "66ページ" },
-    { q: "拘縮期の運動療法で推奨される収縮方法は？", options: ["等張性", "等尺性", "遠心性", "プライオメトリクス"], correct: 1, rationale: "疼痛のない範囲で等尺性収縮を用います。", source: "20ページ" },
-    { q: "広背筋伸張テストの推奨体位は？", options: ["座位", "立位", "側臥位", "腹臥位"], correct: 2, rationale: "側臥位で股関節屈曲・胸腰椎後弯位で行います。", source: "86ページ" },
-    { q: "上腕二頭筋長頭腱が走行する部位は？", options: ["肩峰下", "結節間溝", "棘上窩", "関節下結節"], correct: 1, rationale: "大結節と小結節の間の結節間溝を走行します。", source: "69ページ" },
-    { q: "第1肢位の定義は？", options: ["下垂位", "肘90°屈曲位", "外転90°", "水平屈曲"], correct: 1, rationale: "基本肢位から肘関節を90°屈曲した肢位です。", source: "62ページ" },
-    { q: "緩解期で挙上90°超えに必要な1st外旋角度は？", options: ["0°", "10°", "20°", "45°"], correct: 2, rationale: "インピンジメント回避のため20°以上必要です。", source: "41ページ" },
-    { q: "前鋸筋上部線維が伸張される肩甲骨の動きは？", options: ["外転・下方回旋", "内転・上方回旋", "内転・下方回旋", "挙上・外転"], correct: 1, rationale: "内転と上方回旋で伸張します。", source: "122ページ" },
-    { q: "関節内圧の正常な状態は？", options: ["陽圧", "陰圧（吸着）", "大気圧", "変動なし"], correct: 1, rationale: "正常な関節は陰圧で吸着し安定しています。", source: "9ページ" },
-    { q: "五十肩の病態として臨床的に捉えやすい概念は？", options: ["後方損傷", "前上方組織の損傷・癒着", "肘機能不全", "脊椎変形"], correct: 1, rationale: "肩関節の前上方にある組織の損傷・癒着・瘢痕化です。", source: "8ページ" },
-    { q: "疼痛期のリラクセーション牽引の初期時間は？", options: ["3秒", "10秒", "30秒", "1分"], correct: 0, rationale: "最初は3秒くらい牽引し、ゆっくり戻します。", source: "14ページ" },
-    { q: "疼痛期から推奨される肩甲胸郭関節エクササイズは？", options: ["反動付き挙上", "挙上・下制・外転・内転", "重り回旋", "腕立て"], correct: 1, rationale: "肩甲胸郭関節は炎症が少ないため早期から動かします。", source: "15ページ" },
-    { q: "150°以上の挙上に必要な第2肢位外旋角度は？", options: ["0°", "45°", "60°", "90°"], correct: 3, rationale: "第2肢位外旋90°が必要です。", source: "41ページ" },
-    { q: "更衣動作（上衣）に必要な可動域は？", options: ["屈曲150°", "屈曲70°内・外旋45°", "外転90°", "伸展60°"], correct: 1, rationale: "屈曲70°以上、内・外旋45°以上です。", source: "42ページ" },
-    { q: "緩解期の「体幹回旋運動」で意識することは？", options: ["腰反らし", "体の中心の軸", "腕を振る", "呼吸停止"], correct: 1, rationale: "中心に軸があることをイメージして捻ります。", source: "39ページ" },
-    { q: "三角筋後部線維の圧痛評価で癒着に注意する筋は？", options: ["棘上筋", "棘下筋", "小円筋", "大円筋"], correct: 1, rationale: "棘下筋と癒着していることが多いです。", source: "79ページ" },
-    { q: "上腕二頭筋短頭の圧痛好発部位は？", options: ["結節間溝", "烏口突起遠位1~2横指", "肘窩", "上腕外側"], correct: 1, rationale: "烏口突起から遠位1~2横指の部分です。", source: "141ページ" },
-    { q: "菱形筋の圧痛が特に顕著な部位は？", options: ["肩甲骨内側縁", "棘突起", "上角", "下角"], correct: 0, rationale: "内側縁は筋線維が肥厚しやすく好発部位です。", source: "132ページ" },
-    { q: "小胸筋の圧痛が強く腕神経叢が走行する注意部位は？", options: ["第3肋骨", "烏口突起直上", "烏口突起遠位2~3横指", "鎖骨下"], correct: 2, rationale: "烏口突起から遠位2~3横指は圧痛が強く神経も走行します。", source: "136ページ" },
-    { q: "前鋸筋下部線維の伸張テストの操作は？", options: ["上方回旋・内転", "下方回旋・内転", "外転・挙上", "上方回旋・外転"], correct: 1, rationale: "下方回旋・内転で伸張されます。", source: "124ページ" },
-    { q: "LHBのプーリーシステムを構成しない組織は？", options: ["烏口上腕靭帯", "上関節上腕靭帯", "棘上筋腱", "小円筋腱"], correct: 3, rationale: "小円筋は構成要素に含まれません。", source: "61ページ" },
-    { q: "三角筋周辺の痛みで腋窩神経関連を疑うべき筋は？", options: ["棘上筋", "小円筋", "大胸筋", "前鋸筋"], correct: 1, rationale: "小円筋はQLSを構成し腋窩神経絞扼に関与します。", source: "100ページ" },
-    { q: "C-Cメカニズムで肩甲骨上方回旋時に緊張するのは？", options: ["菱形靭帯", "円錐靭帯", "肩鎖靭帯", "烏口肩峰靭帯"], correct: 1, rationale: "円錐靭帯が緊張します。", source: "59ページ" },
-    { q: "関節包伸張で「骨頭を後方へ」押し込むのが有効なのは？", options: ["前方関節包", "上方関節包", "後方関節包", "下方関節包"], correct: 2, rationale: "後方関節包の伸張には骨頭を後方へ押し込みます。", source: "48ページ" },
-    { q: "腋窩陥凹後方部の伸張で加える回旋は？", options: ["外旋", "内旋", "中間位", "なし"], correct: 1, rationale: "骨頭を下方へ押し込みながら「内旋」させます。", source: "50ページ" },
-    { q: "烏口上腕靭帯上方部を伸張させる操作は？", options: ["伸展・内転・外旋", "軽度外旋から内転", "屈曲・外転", "下垂位"], correct: 1, rationale: "軽度外旋位から肩甲骨面上に内転させます。", source: "49ページ" },
-    { q: "関節包伸張操作で右肩の「12時」が指す方向は？", options: ["烏口突起", "肩鎖関節（上方）", "腋窩", "後方"], correct: 1, rationale: "12時は上方（肩鎖関節方向）です。", source: "44ページ" },
-    { q: "対側肩動作の制限因子となる動きは？", options: ["屈曲・外転", "伸展・内転", "屈曲・内転・内旋", "伸展・外旋"], correct: 2, rationale: "対側肩動作は屈曲・内転・内旋の複合です。", source: "66ページ" },
-    { q: "結帯動作エクササイズでのタオルの使い方は？", options: ["下へ引く", "健側（上）で引き上げる", "横へ開く", "前へ出す"], correct: 1, rationale: "健側（上）の手で患側（下）を引き上げます。", source: "55ページ" },
-    { q: "更衣動作で「下衣」操作に必要な可動域は？", options: ["外転25°外旋30°", "屈曲90°", "内転45°", "伸展20°"], correct: 0, rationale: "外転25°以上、外旋30°以上が必要です。", source: "42ページ" },
-    { q: "大胸筋腹部線維の3rd肢位での作用は？", options: ["屈曲", "伸展・内旋", "外旋", "外転"], correct: 1, rationale: "水平屈曲・伸展・内旋に作用します。", source: "83ページ" },
-    { q: "広背筋が挙上制限因子となる姿勢は？", options: ["腰椎前弯", "円背（後弯）", "直立位", "側弯"], correct: 1, rationale: "円背（後弯）では広背筋が伸張され制限因子になりやすいです。", source: "85ページ" },
-    { q: "棘上筋前部線維が伸張される動きは？", options: ["外転", "内転・軽度外旋", "内転・軽度内旋", "伸展"], correct: 1, rationale: "肩甲骨面上で内転・軽度外旋で伸張します。", source: "45ページ" },
-    { q: "肩甲挙筋伸張テストでの頚椎操作は？", options: ["同側側屈", "対側側屈", "伸展", "回旋"], correct: 1, rationale: "対側へ側屈させます。", source: "129ページ" },
-    { q: "大円筋の3rd肢位での作用は？", options: ["外旋伸張、内旋収縮", "内旋伸張", "なし", "屈曲"], correct: 0, rationale: "外旋で伸張し、内旋で収縮します。", source: "112ページ" },
-    { q: "骨頭の前上方変位改善に有効な関節包アプローチは？", options: ["前方", "後方", "後下方", "上方"], correct: 2, rationale: "後下方関節包の伸張が有効です。", source: "48ページ" },
-    { q: "腱板疎部が緊張して安定する肢位は？", options: ["下垂位内旋", "屈曲内旋", "下垂位外旋", "ゼロポジ"], correct: 2, rationale: "下垂位外旋、外転外旋、伸展で緊張します。", source: "61ページ" },
-    { q: "外転時に棘上筋と協調するアウターマッスルは？", options: ["広背筋", "大胸筋", "三角筋", "僧帽筋"], correct: 2, rationale: "三角筋（外方ベクトル）と棘上筋（内方ベクトル）が協調します。", source: "68ページ" },
-    { q: "拘縮期の可動域制限の炎症以外の原因は？", options: ["壊死", "線維化と癒着", "骨折", "脱臼"], correct: 1, rationale: "組織の瘢痕化（線維化と癒着）が原因です。", source: "20ページ" },
-    { q: "肩甲胸郭関節の動きを悪くする姿勢は？", options: ["側弯", "後弯（猫背）", "反り腰", "ストレートネック"], correct: 1, rationale: "後弯すると肩甲骨が外転位となり動きが悪くなります。", source: "120ページ" },
-    { q: "リラクセーションの「Ib抑制」とは？", options: ["筋腹叩打", "筋腱移行部の持続圧迫伸張", "冷却", "電気"], correct: 1, rationale: "筋腱移行部を引き離しゴルジ腱器官に働きかけます。", source: "91ページ" },
-    { q: "五十肩リハビリで注意すべき代償運動は？", options: ["上方回旋", "体幹回旋", "過剰な挙上（シュラッグ）", "骨盤後傾"], correct: 2, rationale: "肩甲骨の過剰な挙上に注意が必要です。", source: "127ページ" },
-    { q: "伸展運動時の関節軸の軌跡は？", options: ["固定", "消失", "変動する", "直線"], correct: 2, rationale: "運動に伴い微妙に変動します。", source: "58ページ" },
-    { q: "長頭腱炎合併時に圧痛が出る部位は？", options: ["結節間溝", "関節窩", "肩峰", "烏口突起"], correct: 0, rationale: "結節間溝で圧痛が顕著です。", source: "141ページ" },
-    { q: "側臥位（患側上）での夜間痛対策は？", options: ["重り", "ゴム", "抱き枕（クッション）", "ベルト"], correct: 2, rationale: "クッションで腕の高さを保ち過内転を防ぎます。", source: "12ページ" },
-    { q: "三角筋後部線維短縮を疑う水平屈曲角度は？", options: ["45°未満", "30°未満", "20°未満", "10°未満"], correct: 2, rationale: "20°に達しない場合、短縮を疑います。", source: "82ページ" },
-    { q: "1st内旋の制限因子（表より）は？", options: ["棘下筋上部", "棘下筋下部", "小円筋", "大円筋"], correct: 0, rationale: "棘下筋上部線維や後上方関節包です。", source: "63ページ" },
-    { q: "2nd内旋の制限因子（表より）は？", options: ["棘下筋上部", "棘下筋下部・後下方関節包", "肩甲下筋", "大胸筋"], correct: 1, rationale: "棘下筋下部線維や後下方関節包です。", source: "63ページ" },
-    { q: "2nd外旋の主な靭帯性制限因子は？", options: ["SGHL", "AIGHL", "烏口上腕靭帯", "円錐靭帯"], correct: 1, rationale: "前下関節上腕靭帯（AIGHL）です。", source: "63ページ" },
-    { q: "3rd外旋の制限因子（表より）は？", options: ["大円筋", "小円筋", "棘上筋", "広背筋"], correct: 0, rationale: "大円筋および前下方関節包です。", source: "63ページ" },
-    { q: "45°外転外旋で緊張する靭帯は？", options: ["SGHL", "MGHL", "PIGHL", "CHL"], correct: 1, rationale: "中関節上腕靭帯（MGHL）です。", source: "67ページ" },
-    { q: "伸展・内転時に骨頭はどう滑る？", options: ["下方", "上方", "前方", "後方"], correct: 1, rationale: "凸の法則により上方へ滑ります。", source: "57ページ" },
-    { q: "スムーズな運動に必要な関節内圧は？", options: ["陽圧", "大気圧", "陰圧（吸着）", "変動なし"], correct: 2, rationale: "陰圧による吸着が重要です。", source: "58ページ" },
-    { q: "1st内旋時のGH:ST可動域比率は？", options: ["1:1", "2:1", "4:1", "6:1"], correct: 3, rationale: "6:1とされています。", source: "72ページ" },
-    { q: "伸展に伴う肩甲骨の動きは？", options: ["外転・後傾", "内転・前傾・下方回旋", "外転・上方回旋", "挙上"], correct: 1, rationale: "内転・前傾・下方回旋します。", source: "74ページ" },
-    { q: "屈曲に伴う肩甲骨の動きは？", options: ["内転・前傾", "外転・後傾・上方回旋", "下制", "内転のみ"], correct: 1, rationale: "外転（最終域内転）・後傾・上方回旋します。", source: "74ページ" },
-    { q: "僧帽筋中部線維の肩甲骨付着部は？", options: ["鎖骨", "三角部", "肩峰から肩甲棘", "上角"], correct: 2, rationale: "肩峰から肩甲棘に付着します。", source: "121ページ" },
-    { q: "前鋸筋下部線維の肋骨付着部は？", options: ["1-2肋骨", "3-9肋骨", "10-12肋骨", "胸骨"], correct: 1, rationale: "第3～9肋骨に付着します。", source: "122ページ" },
-    { q: "肩甲挙筋の挙上以外の作用は？", options: ["上方回旋", "下方回旋", "外転", "後傾"], correct: 1, rationale: "下方回旋に作用します。", source: "127ページ" },
-    { q: "小胸筋の作用は？", options: ["後傾・上方回旋", "前傾・下方回旋", "挙上", "肋骨挙上"], correct: 1, rationale: "前傾・下方回旋させます。", source: "135ページ" },
-    { q: "上腕三頭筋長頭の肩甲骨付着部は？", options: ["関節上結節", "関節下結節", "烏口突起", "肩峰"], correct: 1, rationale: "関節下結節に付着します。", source: "150ページ" },
-    { q: "疼痛期振り子運動で加える前腕の動きは？", options: ["背屈", "握り込み", "回内外旋", "曲げ伸ばし"], correct: 2, rationale: "回内外方向へ回旋させます。", source: "19ページ" },
-    { q: "拘縮期3rd外旋exの手順は？", options: ["さらに外旋", "外旋位から内旋方向へ等尺性収縮", "内旋位から外旋へ", "保持のみ"], correct: 1, rationale: "最終域で内旋方向へ力を入れます。", source: "28ページ" },
-    { q: "肩甲胸郭exの最終域保持時間は？", options: ["1秒", "3秒", "5秒", "10秒"], correct: 2, rationale: "5秒間保持します。", source: "37ページ" },
-    { q: "結帯動作exでのタオルの持ち手は？", options: ["健側下・患側上", "健側上・患側下", "両手下", "横"], correct: 1, rationale: "健側が上、患側が下（背中側）です。", source: "55ページ" },
-    { q: "内転exでのタオルの操作は？", options: ["前で引く", "後ろで健側の手で引く", "上で引く", "踏む"], correct: 1, rationale: "体の後ろで健側の手で横へ引っ張ります。", source: "54ページ" },
-    { q: "三角筋前部線維短縮を疑う伸展角度は？", options: ["0°", "10°", "20°", "45°"], correct: 2, rationale: "20°未満で疑います。", source: "80ページ" },
-    { q: "大円筋の圧痛好発部位は？", options: ["停止部", "下角付着部付近", "腋窩", "筋腹"], correct: 1, rationale: "下角の付着部付近で顕著です。", source: "113ページ" },
-    { q: "棘下筋上部線維の触診ラインは？", options: ["肩甲棘下縁", "外側縁", "内側縁", "中央"], correct: 0, rationale: "肩甲棘の下縁を触診します。", source: "95ページ" },
-    { q: "烏口上腕靭帯下方部の癒着剥離対象は？", options: ["棘上筋腱", "棘下筋腱", "肩甲下筋腱", "小円筋腱"], correct: 2, rationale: "肩甲下筋腱との癒着を剥離します。", source: "49ページ" },
-    { q: "関節包操作で右肩の「9時」は？", options: ["前方", "後方", "上方", "下方"], correct: 1, rationale: "後方を指します。", source: "44ページ" },
-    { q: "筋攣縮の生理学的メカニズムは？", options: ["物理的短縮", "脊髄反射による興奮と虚血", "架橋結合", "断裂"], correct: 1, rationale: "脊髄反射を基盤とした虚血状態です。", source: "76ページ" },
-    { q: "筋短縮の発生メカニズムは？", options: ["筋節減少と線維化", "反射亢進", "発痛物質", "貯留"], correct: 0, rationale: "筋節減少とコラーゲン線維化です。", source: "77ページ" },
-    { q: "疼痛期筋攣縮へのマッサージ効果の理由は？", options: ["筋が伸びる", "虚血改善", "麻痺", "炎症消失"], correct: 1, rationale: "虚血状態の改善により一時的に改善します。", source: "9ページ" },
-    { q: "夜間痛で伸張を受ける上方支持組織は？", options: ["大円筋", "棘上筋・肩峰下滑液包", "小円筋", "広背筋"], correct: 1, rationale: "棘上筋や肩峰下滑液包です。", source: "11ページ" },
-    { q: "猫背で肩関節を挙上した時の肩甲骨は？", options: ["下制できず挙上", "内転", "後傾", "固定"], correct: 0, rationale: "下制できず挙上してしまいインピンジメントを起こします。", source: "120ページ" },
-    { q: "大胸筋短縮が引き起こす姿勢は？", options: ["平背", "猫背", "側弯", "反り腰"], correct: 1, rationale: "猫背の原因になります。", source: "83ページ" },
-    { q: "水平屈曲exのターゲットは？", options: ["同側の肩へ近づける", "健側の肩へ近づける", "挙げる", "引く"], correct: 1, rationale: "肘を健側の肩に近づけます。", source: "52ページ" },
-    { q: "動的安定化機構の主役は？", options: ["関節包", "靭帯", "腱板", "関節唇"], correct: 2, rationale: "腱板（インナーマッスル）です。", source: "68ページ" },
-    { q: "20-30代の五十肩の特徴は？", options: ["治りにくい", "早く回復する", "手術必須", "再発多"], correct: 1, rationale: "若いほど早く回復する傾向にあります。", source: "2ページ" },
-    { q: "放置することの弊害は？", options: ["ない", "必ず治る", "治療期間長期化など弊害あり", "即座に悪化"], correct: 2, rationale: "自然治癒力に左右されるため弊害も生じます。", source: "3ページ" },
-    { q: "拘縮期に炎症再燃させる行為は？", options: ["安静", "冷却", "むやみな運動", "睡眠"], correct: 2, rationale: "むやみに関節を動かすと再燃します。", source: "5ページ" },
-    { q: "疼痛期から可動域拡大すべき関節は？", options: ["GH", "ST関節", "股関節", "膝"], correct: 1, rationale: "肩甲胸郭関節（ST関節）です。", source: "10ページ" },
-    { q: "リラクセーション牽引の方向は？", options: ["長軸", "下方", "前方", "回旋"], correct: 0, rationale: "上腕の長軸に沿って牽引します。", source: "14ページ" },
-    { q: "拘縮期等尺性収縮の強度は？", options: ["10%", "50%", "80%", "100%"], correct: 0, rationale: "10%程度から開始します。", source: "23ページ" },
+// --- 問題プール Part 1 (五十肩マニュアル上級 1-125問) ---
+const poolPart1 = [
+    // 概論・疫学・基礎
+    {q:"五十肩（肩関節周囲炎）の定義について、最も適切な記述はどれか？",o:["発症から3ヶ月以上経過した慢性の肩痛","画像診断で明らかな腱板断裂が確認されるもの","ある期間を過ぎて肩の痛みが治癒する疾患であり、振り返って初めて診断される","原因不明の肩痛すべてを含む総称"],c:2,r:"「ある期間を過ぎて痛みが治癒する」ことが定義であり、他の疾患との鑑別がなされた上で、後方視的に診断されます。",s:"3ページ"},
+    {q:"五十肩の合併症として、発生率が10〜20%と有意に高い基礎疾患は？",o:["高血圧","脂質異常症","糖尿病","甲状腺機能低下症"],c:2,r:"糖尿病患者は非糖尿病患者に比べて発生率がかなり高く、10〜20%が五十肩であるというデータがあります。",s:"2ページ"},
+    {q:"五十肩の病期分類における「拘縮期」の特徴として正しいのは？",o:["安静時痛が強く、夜間痛で眠れない","炎症は軽減するが、組織の硬化により可動域制限が著明になる","可動域は正常化し、運動時痛のみが残る","炎症が再燃し、疼痛がピークに達する"],c:1,r:"炎症のピーク（疼痛期）を過ぎ、組織が瘢痕化・癒着して関節が固まる時期です。",s:"5ページ"},
+    {q:"五十肩の病態機序として、臨床的に最も捉えやすい概念は？",o:["上腕二頭筋長頭腱の単独損傷","肩関節の前上方にある組織（腱板・滑液包・疎部）の損傷・癒着および第2肩関節の機能障害","肩甲下筋の短縮のみ","関節唇の断裂"],c:1,r:"前上方支持組織（腱板疎部や肩峰下滑液包など）の炎症と癒着が、痛みと拘縮の主座となることが多いです。",s:"8ページ"},
+    {q:"疼痛期におけるリスク管理として、避けるべき治療手技は？",o:["肩甲胸郭関節の可動域訓練","愛護的なリラクセーション牽引","積極的な肩甲上腕関節の可動域拡大運動","アイシング"],c:2,r:"炎症期に患部（GH関節）をむやみに動かすと、炎症を再燃させたり、筋スパズムを悪化させるリスクがあります。",s:"5ページ"},
+    
+    // 解剖・バイオメカニクス
+    {q:"第2肩関節を構成する組織に含まれないものは？",o:["肩峰下滑液包","烏口肩峰アーチ","腱板","関節唇"],c:3,r:"関節唇は第1肩関節（肩甲上腕関節）の構成要素です。第2肩関節は機能的な関節です。",s:"60ページ"},
+    {q:"腱板疎部（Rotator Interval）を構成する筋腱の間隙は？",o:["棘上筋腱と棘下筋腱","棘下筋腱と小円筋腱","棘上筋腱と肩甲下筋腱","小円筋腱と大円筋腱"],c:2,r:"棘上筋腱（前縁）と肩甲下筋腱（上縁）の間の隙間を指し、ここが拘縮すると可動域が著しく制限されます。",s:"61ページ"},
+    {q:"肩甲骨面上で約150°挙上し、上腕骨長軸と肩甲棘が一致する肢位を何というか？",o:["第1肢位","第3肢位","ゼロ・ポジション","安静位"],c:2,r:"筋の張力が均等になり、回旋ストレスが最も少ない安定した肢位です。",s:"65ページ"},
+    {q:"肩関節外転運動における「凹凸の法則」に基づく関節包内運動（滑り）は？",o:["上腕骨頭が上方に転がり、上方に滑る","上腕骨頭が上方に転がり、下方に滑る","上腕骨頭が下方に転がり、上方に滑る","上腕骨頭が前方に滑る"],c:1,r:"骨頭（凸側）は骨運動（上方）と逆方向（下方）に滑ることで、インピンジメントを防ぎます。",s:"57ページ"},
+    {q:"スムーズな関節運動のために必要な関節内圧の状態は？",o:["陽圧","大気圧","陰圧（吸着作用）","変動なし"],c:2,r:"正常な関節内は陰圧に保たれ、骨頭を関節窩に吸着・安定させています。炎症で陽圧化すると不安定になります。",s:"9ページ"},
+    {q:"1st内旋可動域制限の主要な制限因子（筋肉）は？",o:["棘下筋上部線維","棘下筋下部線維","小円筋","大円筋"],c:0,r:"下垂位（1st）での内旋では、棘下筋の上部線維が最も伸張されます。",s:"63ページ"},
+    {q:"2nd外旋（外転90°位での外旋）の主要な靭帯性制限因子は？",o:["上関節上腕靭帯 (SGHL)","中関節上腕靭帯 (MGHL)","前下関節上腕靭帯 (AIGHL)","烏口上腕靭帯 (CHL)"],c:2,r:"外転位での外旋では、関節包の前下方（AIGHL）が緊張し、骨頭の前方移動を制動します。",s:"63ページ"},
+    {q:"肩甲上腕関節（GH）と肩甲胸郭関節（ST）の可動域比率（肩甲上腕リズム）は？",o:["1:1","2:1","3:1","4:1"],c:1,r:"全体として約2:1（GH:120°、ST:60°）の割合で動きます。",s:"72ページ"},
+
+    // 評価・問診
+    {q:"夜間痛の原因として、患側を下にして寝る（側臥位）ことで増悪するメカニズムは？",o:["肩関節が過伸展位になるから","肩関節が過内転位になり、上方支持組織が伸張されるから","血流が遮断されるから","神経が圧迫されるから"],c:1,r:"患側を下にして寝ると、肩関節は内転位を強制され、棘上筋や滑液包などの炎症部位に伸張ストレスがかかります。",s:"12ページ"},
+    {q:"結帯動作（背中に手を回す）は、どのような運動の複合か？",o:["伸展・内転・内旋","屈曲・外転・外旋","伸展・外転・内旋","屈曲・内転・内旋"],c:0,r:"結帯動作は「伸展・内転・内旋」の複合運動であり、前方・上方組織の柔軟性が要求されます。",s:"66ページ"},
+    {q:"対側肩に手を置く動作（水平内転テスト等）の制限因子となる運動方向は？",o:["屈曲・外転","伸展・内転","屈曲・内転・内旋","伸展・外旋"],c:2,r:"対側肩へのリーチは、屈曲・内転・内旋の複合運動です。",s:"66ページ"},
+    {q:"三角筋前部線維の短縮を評価する際、肩関節をどのような肢位に誘導するか？",o:["下垂位で伸展","外転位で伸展","外転位で屈曲","屈曲位で内転"],c:1,r:"外転位で伸展させることで、前部線維を選択的に伸張・評価できます。",s:"80ページ"},
+    {q:"前鋸筋下部線維の伸張テストにおける肩甲骨の操作方向は？",o:["上方回旋・外転","下方回旋・内転","挙上・外転","下制・内転"],c:1,r:"前鋸筋の作用（上方回旋・外転）と逆の動き（下方回旋・内転）で伸張性を評価します。",s:"124ページ"},
+
+    // 治療・アプローチ
+    {q:"疼痛期におけるリラクセーション牽引の正しい方向は？",o:["床に対して垂直方向","上腕骨の長軸方向","体幹に対して垂直方向","回旋方向"],c:1,r:"上腕骨の長軸に沿って優しく牽引することで、筋緊張を緩和し関節内圧を下げます。",s:"14ページ"},
+    {q:"拘縮期における等尺性収縮（マッスルセッティング）の推奨強度は？",o:["100%（全力）","50%程度","10%〜20%（痛みが出ない範囲）","80%以上"],c:2,r:"強い収縮は痛みを誘発するため、10〜20%程度の弱い力から開始します。",s:"23ページ"},
+    {q:"棘上筋前部線維を選択的に伸張（ストレッチ）させる肢位は？",o:["下垂位で内転","肩甲骨面上で内転・軽度外旋","最大外転","伸展・内旋"],c:1,r:"解剖学的走行を考慮すると、肩甲骨面上で内転させつつ、軽度外旋位にすることで効果的に伸張されます。",s:"45ページ"},
+    {q:"後方関節包の伸張性を改善するために、骨頭を徒手的に動かす方向は？",o:["前方","後方","上方","下方"],c:1,r:"（注：関節包の伸張方向と骨頭の押し込み方向の関係）後方関節包を伸ばすには、骨頭を後方へ押し込む（グライディング）操作が有効です。",s:"48ページ"},
+    {q:"腋窩陥凹（Axillary Pouch）の後方部を伸張する際の操作は？",o:["骨頭を上方へ引き上げる","骨頭を下方へ押し込みながら「内旋」させる","骨頭を下方へ押し込みながら「外旋」させる","圧迫のみ"],c:1,r:"下方への押し込みに加え、内旋を加えることで後方成分をより伸張できます。",s:"50ページ"},
+    {q:"烏口上腕靭帯（CHL）の上方部線維を伸張させる操作は？",o:["下垂位での外旋","軽度外旋位から肩甲骨面上での内転","屈曲・内転","伸展・内旋"],c:1,r:"CHL上方部は棘上筋と連結しており、軽度外旋位からの内転操作で伸張されます。",s:"49ページ"},
+    {q:"「12時の方向」への関節包内運動改善アプローチが指す方向は？",o:["前方","後方","上方（肩鎖関節方向）","下方（腋窩方向）"],c:2,r:"時計盤に見立てた場合、12時は上方（頭側）を指します。",s:"44ページ"},
+    {q:"肩甲骨の過剰な挙上（シュラッグ）代償を抑制するために、アプローチすべき筋は？",o:["僧帽筋上部","肩甲挙筋","僧帽筋下部・前鋸筋","大菱形筋"],c:2,r:"僧帽筋下部や前鋸筋（下部）は肩甲骨の下制・上方回旋に働き、挙上代償を抑制するスタビライザーとして重要です。",s:"127ページ"},
+
+    // 筋・神経・機能解剖
+    {q:"三角筋後部線維の圧痛評価において、癒着を疑うべき隣接筋は？",o:["棘上筋","棘下筋","小円筋","大円筋"],c:1,r:"三角筋後部と棘下筋は重なり合っており、この間の癒着が後方部痛の原因になりやすいです。",s:"79ページ"},
+    {q:"上腕二頭筋短頭の圧痛が好発する部位は？",o:["結節間溝","烏口突起の直上","烏口突起から遠位1~2横指","上腕骨中央"],c:2,r:"烏口突起の付着部そのものより、少し遠位の筋腱移行部付近で圧痛が出やすいです。",s:"141ページ"},
+    {q:"小胸筋の短縮が引き起こす肩甲骨のアライメント異常は？",o:["後傾・上方回旋","前傾・下方回旋","挙上・外転","下制・内転"],c:1,r:"小胸筋は烏口突起に付着するため、短縮すると肩甲骨を前傾・下方回旋させます。",s:"135ページ"},
+    {q:"四辺形間隙（QLS）を構成し、腋窩神経の絞扼に関与する筋は？",o:["棘上筋","小円筋","肩甲下筋","広背筋"],c:1,r:"小円筋、大円筋、上腕三頭筋長頭、上腕骨で構成されるQLSを腋窩神経が通過します。",s:"100ページ"},
+    {q:"烏口腕筋を貫通し、絞扼されると前腕外側に痺れを出す神経は？",o:["正中神経","尺骨神経","橈骨神経","筋皮神経"],c:3,r:"筋皮神経は烏口腕筋を貫通して走行するため、同筋の硬結により絞扼されやすいです。",s:"145ページ"},
+    {q:"広背筋が短縮した際に制限されやすい肩関節の可動域は？",o:["伸展","内旋","屈曲（挙上）","内転"],c:2,r:"広背筋は伸展・内旋・内転作用を持つため、短縮すると屈曲（挙上）を強く制限します。",s:"85ページ"},
+    {q:"大円筋の作用として正しいものは？（第3肢位において）",o:["外旋で伸張、内旋で収縮","内旋で伸張、外旋で収縮","屈曲作用","作用しない"],c:0,r:"大円筋は内旋筋であるため、外旋位で伸張され、内旋時に収縮します。",s:"112ページ"},
+    {q:"肩甲挙筋の作用で、挙上以外に重要な働きは？",o:["肩甲骨の上方回旋","肩甲骨の下方回旋","肩甲骨の外転","肩甲骨の後傾"],c:1,r:"肩甲挙筋は肩甲骨を挙上させつつ、下方回旋させる作用を持ちます。",s:"127ページ"},
+
+    // その他・応用
+    {q:"「痛みの認知行動療法」的アプローチとして、患者に伝えるべき適切なメッセージは？",o:["痛いときは絶対に動かさないでください","痛みは組織の損傷を意味するので、安静が第一です","痛みの範囲内であれば、動かしても壊れることはありません","痛みがなくなるまでリハビリは休みましょう"],c:2,r:"「動かしても大丈夫」という安心感を与え、過度な恐怖心（Fear-avoidance）を取り除くことが慢性痛改善の鍵です。",s:"263ページ"},
+    {q:"五十肩患者における「腱板疎部」の安定化肢位は？",o:["下垂位内旋","下垂位外旋","屈曲位","内転位"],c:1,r:"下垂位で外旋すると、疎部（SGHLやCHL）が緊張し、骨頭が安定します。",s:"61ページ"},
+    {q:"C-Cメカニズム（鎖骨と烏口突起の連動）において、肩甲骨上方回旋時に緊張する靭帯は？",o:["菱形靭帯","円錐靭帯","肩鎖靭帯","烏口肩峰靭帯"],c:1,r:"上方回旋に伴い、烏口鎖骨靭帯の後部にある円錐靭帯が緊張し、鎖骨を後方回旋させます。",s:"59ページ"},
+    {q:"結帯動作の改善において、患側を上に引き上げる際に使用する手は？",o:["患側の手で頑張って上げる","健側の手でタオル等を使い引き上げる","セラピストが強く押し上げる","反動をつける"],c:1,r:"患側の筋力を使わず、健側の手でアシストすることで、過剰な筋緊張を防ぎながら可動域を広げます。",s:"55ページ"},
+    {q:"更衣動作（上衣の着脱）をスムーズに行うために必要な可動域の目安は？",o:["屈曲90°","屈曲150°以上、結帯動作が可能","外転180°","伸展60°"],c:1,r:"袖を通すための結帯動作（伸展・内旋）と、頭を通すための屈曲・外旋（150°程度）の両方が必要です。",s:"42ページ"},
 ];
-</script>
-<script>
-// --- パート2：問題データ後半（101-203） ---
-const questionsPart2 = [
-    { q: "2nd外旋90°3rd内旋0°が必要な挙上角度は？", options: ["90°", "120°", "150°", "180°"], correct: 2, rationale: "150°以上の挙上に必要です。", source: "41ページ" },
-    { q: "関節包伸張で3時（右肩）の方向は？", options: ["上方", "前方", "下方", "後方"], correct: 1, rationale: "前方を指します。", source: "44ページ" },
-    { q: "上方関節包伸張に利用する筋は？", options: ["棘上筋", "棘下筋", "小円筋", "肩甲下筋"], correct: 0, rationale: "棘上筋の機能を用います。", source: "45ページ" },
-    { q: "後方関節包伸張に利用する筋は？", options: ["棘上筋", "棘下筋", "小円筋", "肩甲下筋"], correct: 1, rationale: "棘下筋の機能を用います。", source: "48ページ" },
-    { q: "腋窩陥凹縮小時の伸張方向は？", options: ["上方", "下方", "内方", "外方"], correct: 1, rationale: "下方へ押し込みます。", source: "50ページ" },
-    { q: "肩関節支柱の骨に含まれないのは？", options: ["上腕骨", "肩甲骨", "鎖骨", "胸骨"], correct: 3, rationale: "胸骨は支柱としては記載されていません。", source: "58ページ" },
-    { q: "第2肩関節の役割でないのは？", options: ["機能向上", "抑え込み", "支点形成", "内転制限"], correct: 3, rationale: "内転制限は役割ではありません。", source: "60ページ" },
-    { q: "第2肢位の定義は？", options: ["肘90°", "1stから外転90°", "水平屈曲", "挙上"], correct: 1, rationale: "1stポジションから90°外転した肢位です。", source: "62ページ" },
-    { q: "第3肢位の定義は？", options: ["肘90°", "1st外転", "2ndから水平屈曲90°", "結帯"], correct: 2, rationale: "2ndから90°水平屈曲した肢位です。", source: "62ページ" },
-    { q: "対側肩動作の運動複合は？", options: ["屈曲外転", "伸展内転", "屈曲内転内旋", "水平伸展"], correct: 2, rationale: "屈曲・内転・内旋です。", source: "66ページ" },
-    { q: "SGHLが緊張する肢位は？", options: ["1st外旋", "3rd内旋", "45°外転", "下垂"], correct: 0, rationale: "第1肢位外旋で緊張します。", source: "67ページ" },
-    { q: "筋短縮の特徴は？", options: ["圧痛あり", "伸張で緊張増・短縮で低下", "収縮時痛", "安静時痛"], correct: 1, rationale: "伸張位で緊張し、短縮位で弛緩します。", source: "78ページ" },
-    { q: "三角筋前部線維圧痛確認の誘導は？", options: ["外転伸展", "外転屈曲", "屈曲内転", "下垂"], correct: 0, rationale: "外転位で伸展させると緊張し確認しやすいです。", source: "80ページ" },
-    { q: "大胸筋鎖骨部の作用は？", options: ["伸展", "水平伸展", "上方変位", "下制"], correct: 2, rationale: "上腕骨の上方変位に作用します。", source: "83ページ" },
-    { q: "中枢性感作とは？", options: ["閾値上昇", "閾値低下・過敏化", "麻痺", "筋肥大"], correct: 1, rationale: "痛みの閾値が低下し過敏になることです。", source: "9ページ" },
-    { q: "疼痛期のリラクセーション牽引開始肢位は？", options: ["肩甲骨面上45°挙上", "下垂", "外転90°", "伸展"], correct: 0, rationale: "肩甲骨面上45°から行います。", source: "14ページ" },
-    { q: "拘縮期エクササイズの保持時間は？", options: ["1秒", "3秒", "10秒", "30秒"], correct: 1, rationale: "約3秒間保持します。", source: "24ページ" },
-    { q: "拘縮期負荷の最大強度は？", options: ["100%", "80%", "50%", "20%"], correct: 3, rationale: "回復しても20%程度までです。", source: "23ページ" },
-    { q: "机を使った挙上exの保持時間は？", options: ["1秒", "3秒", "5秒", "10秒"], correct: 2, rationale: "5秒ほど保持します。", source: "51ページ" },
-    { q: "三角筋後部線維の圧痛で疑う癒着は？", options: ["棘上筋", "棘下筋", "小円筋", "大円筋"], correct: 1, rationale: "棘下筋との癒着が多いです。", source: "79ページ" },
-    { q: "上腕二頭筋短頭の圧痛部位は？", options: ["結節間溝", "烏口突起遠位1-2横指", "肘", "外側"], correct: 1, rationale: "烏口突起遠位です。", source: "141ページ" },
-    { q: "菱形筋圧痛の好発部位は？", options: ["内側縁", "棘突起", "上角", "下角"], correct: 0, rationale: "肩甲骨内側縁です。", source: "132ページ" },
-    { q: "小胸筋圧痛の注意部位は？", options: ["肋骨", "烏口突起", "烏口突起遠位2-3横指", "鎖骨"], correct: 2, rationale: "遠位2-3横指は腕神経叢が近いです。", source: "136ページ" },
-    { q: "前鋸筋下部線維伸張テストは？", options: ["上方回旋内転", "下方回旋内転", "外転", "挙上"], correct: 1, rationale: "下方回旋・内転させます。", source: "124ページ" },
-    { q: "プーリーシステムに含まれないのは？", options: ["CHL", "SGHL", "SSP", "Tm"], correct: 3, rationale: "小円筋（Tm）は含まれません。", source: "61ページ" },
-    { q: "筋皮神経絞扼の筋は？", options: ["二頭筋", "上腕筋", "烏口腕筋", "三頭筋"], correct: 2, rationale: "烏口腕筋を貫通します。", source: "145ページ" },
-    { q: "腋窩神経関連で疑う筋は？", options: ["棘上筋", "小円筋", "大胸筋", "前鋸筋"], correct: 1, rationale: "小円筋はQLSを構成します。", source: "100ページ" },
-    { q: "肩甲骨上方回旋で緊張する烏口鎖骨靭帯は？", options: ["菱形", "円錐", "肩鎖", "烏口肩峰"], correct: 1, rationale: "円錐靭帯です。", source: "59ページ" },
-    { q: "後方関節包伸張の骨頭操作は？", options: ["前方", "上方", "後方", "下方"], correct: 2, rationale: "後方へ押し込みます。", source: "48ページ" },
-    { q: "腋窩陥凹後方伸張の回旋は？", options: ["外旋", "内旋", "中間", "なし"], correct: 1, rationale: "内旋させます。", source: "50ページ" },
-    { q: "烏口上腕靭帯上方部伸張の操作は？", options: ["伸展", "外旋から内転", "屈曲", "牽引"], correct: 1, rationale: "軽度外旋から肩甲骨面上内転です。", source: "49ページ" },
-    { q: "右肩関節包伸張の「12時」は？", options: ["烏口突起", "肩鎖関節", "腋窩", "後方"], correct: 1, rationale: "上方（肩鎖関節）です。", source: "44ページ" },
-    { q: "対側肩動作の制限因子は？", options: ["屈曲外転", "伸展内転", "屈曲内転内旋", "伸展外旋"], correct: 2, rationale: "屈曲・内転・内旋です。", source: "66ページ" },
-    { q: "結帯動作exのタオル操作は？", options: ["下へ", "上で引く", "横へ", "前へ"], correct: 1, rationale: "健側（上）で引き上げます。", source: "55ページ" },
-    { q: "下衣操作の可動域は？", options: ["外転25°外旋30°", "屈曲90°", "内転45°", "伸展20°"], correct: 0, rationale: "外転25°以上、外旋30°以上です。", source: "42ページ" },
-    { q: "大胸筋腹部線維の3rd作用は？", options: ["屈曲", "伸展・内旋", "外旋", "外転"], correct: 1, rationale: "伸展・内旋に作用します。", source: "83ページ" },
-    { q: "広背筋制限の姿勢は？", options: ["前弯", "円背", "直立", "側弯"], correct: 1, rationale: "円背（後弯）です。", source: "85ページ" },
-    { q: "棘上筋前部線維伸張は？", options: ["外転", "内転・軽度外旋", "内転・内旋", "伸展"], correct: 1, rationale: "内転・軽度外旋です。", source: "45ページ" },
-    { q: "肩甲挙筋伸張の頚椎操作は？", options: ["同側", "対側側屈", "伸展", "回旋"], correct: 1, rationale: "対側へ側屈します。", source: "129ページ" },
-    { q: "大円筋3rdの作用は？", options: ["外旋伸張", "内旋伸張", "なし", "屈曲"], correct: 0, rationale: "外旋で伸張、内旋で収縮です。", source: "112ページ" },
-    { q: "骨頭前上方変位改善のアプローチは？", options: ["前方", "後方", "後下方", "上方"], correct: 2, rationale: "後下方関節包です。", source: "48ページ" },
-    { q: "腱板疎部安定肢位は？", options: ["下垂内旋", "屈曲", "下垂外旋", "ゼロ"], correct: 2, rationale: "下垂位外旋等で安定します。", source: "61ページ" },
-    { q: "外転時のアウター協調筋は？", options: ["広背筋", "大胸筋", "三角筋", "僧帽筋"], correct: 2, rationale: "三角筋です。", source: "68ページ" },
-    { q: "拘縮期の制限原因は？", options: ["壊死", "瘢痕化", "骨折", "脱臼"], correct: 1, rationale: "線維化と癒着（瘢痕化）です。", source: "20ページ" },
-    { q: "肩甲胸郭の動き悪い姿勢は？", options: ["側弯", "後弯", "反り腰", "ストレート"], correct: 1, rationale: "後弯（猫背）です。", source: "120ページ" },
-    { q: "Ib抑制とは？", options: ["叩打", "腱移行部圧迫伸張", "冷却", "電気"], correct: 1, rationale: "腱移行部を持続的に圧迫伸張します。", source: "91ページ" },
-    { q: "リハビリの代償運動注意は？", options: ["上方回旋", "回旋", "過剰挙上", "後傾"], correct: 2, rationale: "シュラッグ（過剰挙上）に注意です。", source: "127ページ" },
-    { q: "伸展時の軸軌跡は？", options: ["固定", "消失", "変動", "直線"], correct: 2, rationale: "変動します。", source: "58ページ" },
-    { q: "長頭腱炎の圧痛部位は？", options: ["結節間溝", "関節窩", "肩峰", "烏口突起"], correct: 0, rationale: "結節間溝です。", source: "141ページ" },
-    { q: "側臥位夜間痛対策は？", options: ["重り", "ゴム", "抱き枕", "ベルト"], correct: 2, rationale: "クッションで高さを保ちます。", source: "12ページ" },
-    { q: "三角筋後部短縮の水平屈曲角度は？", options: ["45°未満", "30°未満", "20°未満", "10°未満"], correct: 2, rationale: "20°未満です。", source: "82ページ" },
-    { q: "1st内旋制限因子は？", options: ["棘下筋上部", "棘下筋下部", "小円筋", "大円筋"], correct: 0, rationale: "棘下筋上部線維です。", source: "63ページ" },
-    { q: "2nd内旋制限因子は？", options: ["棘下筋上部", "棘下筋下部", "肩甲下筋", "大胸筋"], correct: 1, rationale: "棘下筋下部線維です。", source: "63ページ" },
-    { q: "2nd外旋靭帯制限因子は？", options: ["SGHL", "AIGHL", "CHL", "円錐"], correct: 1, rationale: "AIGHLです。", source: "63ページ" },
-    { q: "3rd外旋筋制限因子は？", options: ["大円筋", "小円筋", "棘上筋", "広背筋"], correct: 0, rationale: "大円筋です。", source: "63ページ" },
-    { q: "45°外転外旋で緊張する靭帯は？", options: ["SGHL", "MGHL", "PIGHL", "CHL"], correct: 1, rationale: "MGHLです。", source: "67ページ" },
-    { q: "伸展内転の滑りは？", options: ["下方", "上方", "前方", "後方"], correct: 1, rationale: "上方へ滑ります。", source: "57ページ" },
-    { q: "スムーズな運動の関節内圧は？", options: ["陽圧", "大気圧", "陰圧", "なし"], correct: 2, rationale: "陰圧（吸着）です。", source: "58ページ" },
-    { q: "1st内旋のGH:ST比は？", options: ["1:1", "2:1", "4:1", "6:1"], correct: 3, rationale: "6:1です。", source: "72ページ" },
-    { q: "伸展時の肩甲骨は？", options: ["外転後傾", "内転前傾下方回旋", "外転上方回旋", "挙上"], correct: 1, rationale: "内転・前傾・下方回旋します。", source: "74ページ" },
-    { q: "屈曲時の肩甲骨は？", options: ["内転前傾", "外転後傾上方回旋", "下制", "内転"], correct: 1, rationale: "外転・後傾・上方回旋します。", source: "74ページ" },
-    { q: "僧帽筋中部付着部は？", options: ["鎖骨", "三角部", "肩峰から肩甲棘", "上角"], correct: 2, rationale: "肩峰から肩甲棘です。", source: "121ページ" },
-    { q: "前鋸筋下部肋骨付着は？", options: ["1-2", "3-9", "10-12", "胸骨"], correct: 1, rationale: "3-9肋骨です。", source: "122ページ" },
-    { q: "肩甲挙筋の作用は？", options: ["上方回旋", "下方回旋", "外転", "後傾"], correct: 1, rationale: "下方回旋です。", source: "127ページ" },
-    { q: "小胸筋の作用は？", options: ["後傾", "前傾下方回旋", "挙上", "肋骨挙上"], correct: 1, rationale: "前傾・下方回旋です。", source: "135ページ" },
-    { q: "三頭筋長頭肩甲骨付着は？", options: ["上結節", "下結節", "烏口", "肩峰"], correct: 1, rationale: "関節下結節です。", source: "150ページ" },
-    { q: "振り子運動の追加動作は？", options: ["背屈", "握る", "回内外旋", "曲げ伸ばし"], correct: 2, rationale: "回内外方向へ回旋です。", source: "19ページ" },
-    { q: "拘縮期3rd外旋ex手順は？", options: ["さらに外旋", "内旋へ等尺性収縮", "内旋から外旋へ", "保持"], correct: 1, rationale: "内旋方向へ等尺性収縮です。", source: "28ページ" },
-    { q: "肩甲胸郭ex保持時間は？", options: ["1秒", "3秒", "5秒", "10秒"], correct: 2, rationale: "5秒保持です。", source: "37ページ" },
-    { q: "結帯exタオル持ち手は？", options: ["健側下", "健側上", "両下", "横"], correct: 1, rationale: "健側が上です。", source: "55ページ" },
-    { q: "内転exタオル操作は？", options: ["前", "後ろ健側で引く", "上", "踏む"], correct: 1, rationale: "後ろで健側で引きます。", source: "54ページ" },
-    { q: "三角筋前部短縮伸展角度は？", options: ["0°", "10°", "20°", "45°"], correct: 2, rationale: "20°未満です。", source: "80ページ" },
-    { q: "大円筋圧痛好発は？", options: ["停止", "下角付近", "腋窩", "筋腹"], correct: 1, rationale: "下角付着部付近です。", source: "113ページ" },
-    { q: "棘下筋上部触診ラインは？", options: ["肩甲棘下縁", "外側", "内側", "中央"], correct: 0, rationale: "肩甲棘下縁です。", source: "95ページ" },
-    { q: "CHL下方部癒着剥離は？", options: ["棘上筋", "棘下筋", "肩甲下筋", "小円筋"], correct: 2, rationale: "肩甲下筋腱です。", source: "49ページ" },
-    { q: "関節包操作9時は？", options: ["前方", "後方", "上方", "下方"], correct: 1, rationale: "後方です。", source: "44ページ" }
+    // --- 問題プール Part 2 (五十肩マニュアル上級 126-250) ---
+const poolPart2 = [
+    // 筋・神経・機能解剖（続き）
+    {q:"小胸筋の圧痛が強く、腕神経叢の絞扼（胸郭出口症候群）を疑うべき圧痛部位は？",o:["第3肋骨付近","烏口突起直上","烏口突起から遠位2~3横指","鎖骨下"],c:2,r:"烏口突起から遠位2~3横指の部分は、小胸筋の下を腕神経叢が通過する部位であり、圧痛が強い場合は絞扼を疑います。",s:"136ページ"},
+    {q:"前鋸筋下部線維の短縮（伸張テスト陽性）が肩甲骨運動に及ぼす影響は？",o:["上方回旋制限","下方回旋制限","外転制限","挙上制限"],c:0,r:"前鋸筋下部線維は肩甲骨を上方回旋させる主要な筋ですが、短縮すると逆に正常な上方回旋の軌道を阻害することがあります（※マニュアルの文脈では伸張テストで下方回旋・内転させるため、短縮すると上方回旋・外転位で固まる可能性がありますが、機能不全としては上方回旋が出にくくなることが多いです）。",s:"124ページ"},
+    {q:"上腕二頭筋長頭腱（LHB）の「プーリーシステム」に含まれない組織は？",o:["烏口上腕靭帯（CHL）","上関節上腕靭帯（SGHL）","棘上筋腱","小円筋腱"],c:3,r:"LHBを結節間溝に安定させるプーリー（滑車）システムは、CHL、SGHL、棘上筋腱、肩甲下筋腱などで構成されます。小円筋は関与しません。",s:"61ページ"},
+    {q:"腋窩神経の絞扼障害を疑う際、筋力低下以外に評価すべき項目は？",o:["上腕二頭筋反射","肩外側（三角筋領域）の感覚障害","手背の感覚","握力"],c:1,r:"腋窩神経は三角筋の運動支配だけでなく、肩外側の皮膚感覚も支配しているため、知覚鈍麻の有無を確認します。",s:"230ページ"},
+    {q:"肩甲骨の上方回旋に伴い、鎖骨の「後方回旋」を誘導する靭帯は？",o:["菱形靭帯","円錐靭帯","肩鎖靭帯","烏口肩峰靭帯"],c:1,r:"烏口鎖骨靭帯のうち、後方にある円錐靭帯が緊張することで、鎖骨を後方へ回転させます。",s:"59ページ"},
+    {q:"肩甲下筋の触診において、指を侵入させる正しい方向と位置は？",o:["腋窩の後壁から肩甲骨後面へ","腋窩の深部から肩甲骨前面（肋骨面）へ","大胸筋の上から","鎖骨の下"],c:1,r:"肩甲下筋は肩甲骨の裏側（肋骨面）にあるため、腋窩から指を深く入れ、肩甲骨の前面に沿って触診します。",s:"77ページ"},
+    {q:"烏口腕筋の触診において、筋皮神経を圧迫しないように注意すべき理由は？",o:["動脈を止めてしまうから","筋皮神経が烏口腕筋を貫通しており、圧迫で放散痛や痺れが出るから","筋断裂を起こすから","骨折させるから"],c:1,r:"筋皮神経は烏口腕筋を貫通して走行するため、強い圧迫は神経症状を誘発します。",s:"145ページ"},
+    {q:"大胸筋鎖骨部と三角筋前部線維の境界にある「モーレンハイム窩」の臨床的意義は？",o:["特にない","橈側皮静脈が通り、触診のランドマークとなる","神経が通る","骨折しやすい"],c:1,r:"大胸筋と三角筋を分ける重要なランドマークであり、深層には小胸筋や血管神経束が存在します。",s:"73ページ"},
+
+    // 治療・応用（続き）
+    {q:"肩甲胸郭関節の可動域拡大訓練（モビライゼーション）を行う際の保持時間は？",o:["1秒","3秒","5秒","10秒"],c:2,r:"最終域で5秒程度保持することで、組織の伸張と学習効果を高めます。",s:"37ページ"},
+    {q:"拘縮期における「3rd外旋エクササイズ」の正しい手順は？",o:["痛みを我慢して外旋する","外旋最終域から、内旋方向へ等尺性収縮を行う（ホールドリラックス）","反動をつけて外旋する","重りを持つ"],c:1,r:"可動域限界で拮抗筋（内旋筋）を収縮させ、その後の弛緩を利用して可動域を広げます。",s:"28ページ"},
+    {q:"「振り子運動」の効果を高めるために追加すべき動作は？",o:["肘の屈伸","手首の背屈","前腕の回内・回外","指の屈伸"],c:2,r:"単なる前後運動だけでなく、回旋（回内外）を加えることで、関節包や腱板へのリラクセーション効果が高まります。",s:"19ページ"},
+    {q:"結帯動作の改善において、患側の手を「健側の手」で引き上げる理由は？",o:["患側の筋力低下を補うため","患側の過剰な筋緊張（防御性収縮）を防ぎ、他動的に可動域を広げるため","健側のトレーニングになるから","左右差を確認するため"],c:1,r:"患側で頑張って上げようとするとアウターマッスルが緊張し、かえって動きが悪くなるため、健側主導で行います。",s:"55ページ"},
+    {q:"内転エクササイズ（体の後ろで健側の手で引く）の際、注意すべき代償動作は？",o:["体幹の回旋（患側へ向く）","体幹の側屈","肘の屈曲","首の伸展"],c:0,r:"腕が引かれるのに合わせて体が回ってしまわないよう、体幹は正面を向いたまま行います。",s:"54ページ"},
+    {q:"水平屈曲（Adduction）ストレッチの際、肩甲骨を固定する理由は？",o:["痛みを増やすため","肩甲骨が外転（前方に移動）してしまうと、後方組織（後方関節包・筋）が十分に伸張されないから","肩甲骨が内転するから","鎖骨を折らないため"],c:1,r:"肩甲骨が一緒に動いてしまうと、ターゲットであるGH関節後方組織へのストレッチ効果が逃げてしまいます。",s:"52ページ"},
+    {q:"上方支持組織（棘上筋・滑液包）の伸張ストレスを減らすために、夜間就寝時に行うべき工夫は？",o:["枕を高くする","患側の下（肘〜手首）にタオルやクッションを入れ、肩の過伸展・過内転を防ぐ","うつ伏せで寝る","バンザイして寝る"],c:1,r:"肩がベッドに落ち込んで過伸展・内転位になるのを防ぐことで、安静時痛を緩和します。",s:"12ページ"},
+    {q:"「腱板疎部」の癒着を剥離・伸張させるために有効なアプローチは？",o:["下垂位での外旋ストレッチ","下垂位での内旋ストレッチ","屈曲・内転","外転・内旋"],c:0,r:"腱板疎部（SGHL, CHL）は下垂位外旋で緊張するため、この肢位での持続伸張が有効です。",s:"61ページ"},
+
+    // その他・総合
+    {q:"五十肩患者への生活指導で「痛いから動かさない」ことの弊害（不動の悪循環）として正しいのは？",o:["炎症が早く治まる","組織の線維化・癒着が進行し、拘縮が悪化する","筋力が増える","骨が丈夫になる"],c:1,r:"必要以上の安静は、組織の癒着を強固にし、廃用性筋萎縮や血流低下を招き、治癒を遅らせます。",s:"3ページ"},
+    {q:"糖尿病がある五十肩患者の予後について、あらかじめ説明しておくべきことは？",o:["すぐに治ります","通常よりも治癒に時間がかかり、重症化しやすい傾向があります","手術しか方法がありません","薬は効きません"],c:1,r:"高血糖による組織の糖化や血流障害により、炎症が長引きやすく、拘縮も強固になりやすいです。",s:"2ページ"},
+    {q:"肩関節の「安定化機構」において、静的安定化機構に含まれるのは？",o:["腱板","上腕二頭筋長頭腱","関節唇・関節包・靭帯","三角筋"],c:2,r:"骨、軟骨、関節唇、関節包、靭帯などが静的な（動かない）安定化機構です。",s:"68ページ"},
+    {q:"肩関節の「動的安定化機構」の主役となる筋群は？",o:["大胸筋・広背筋","三角筋","ローテーターカフ（回旋腱板）","僧帽筋"],c:2,r:"インナーマッスルである腱板が、骨頭を関節窩に引きつけ、動的な安定性を保ちます。",s:"68ページ"},
+    {q:"「痛みの認知行動療法」的アプローチで、患者の破局的思考（Catastrophizing）を改善するための言葉かけは？",o:["痛いと組織が壊れます","もう治らないかもしれません","痛みがあっても動かして大丈夫です。動かすことで血流が良くなり治癒が促進されます","痛みがゼロになるまで待ちましょう"],c:2,r:"痛みに対する過剰な恐怖心を解き、適切な活動を促すことで、脳の疼痛抑制機能を回復させます。",s:"9ページ"},
+    {q:"五十肩の回復期において、再発予防のために重要となる機能は？",o:["三角筋の筋力","肩甲骨と上腕骨の協調的な運動（肩甲上腕リズム）の獲得","関節の硬さ","痛みの無視"],c:1,r:"可動域が改善しても、使い方が悪い（代償動作が残っている）と再発しやすいため、モーターコントロールの再教育が重要です。",s:"127ページ"}
 ];
 
-// --- 統合ロジック ---
-const allQuestionsPool = questionsPart1.concat(questionsPart2); // 問題結合
+// --- 2つのプールを結合して使用する ---
+const questionPool = poolPart1.concat(poolPart2);
 
-// 配列シャッフル
-function shuffleArray(array) {
-    const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
+// --- システムロジック ---
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        [array[i], array[j]] = [array[j], array[i]];
     }
-    return newArray;
+    return array;
 }
 
 let currentQuizSet = [];
 let currentQuestionIndex = 0;
 let score = 0;
-const QUESTIONS_PER_ROUND = 30;
 
 const startScreen = document.getElementById('start-screen');
 const quizScreen = document.getElementById('quiz-screen');
 const resultScreen = document.getElementById('result-screen');
-const poolCountLabel = document.getElementById('pool-count');
-const questionText = document.getElementById('question-text');
-const optionsContainer = document.getElementById('options-container');
-const feedbackArea = document.getElementById('feedback-area');
-const progressText = document.getElementById('progress');
-const scoreText = document.getElementById('current-score');
+const questionBox = document.getElementById('question');
+const optionsBox = document.getElementById('options');
+const feedbackBox = document.getElementById('feedback');
 const nextBtn = document.getElementById('next-btn');
-
-poolCountLabel.textContent = allQuestionsPool.length;
+const progress = document.getElementById('progress');
+const scoreDisplay = document.getElementById('score');
 
 function startQuiz() {
-    const shuffledPool = shuffleArray(allQuestionsPool);
-    const count = Math.min(QUESTIONS_PER_ROUND, shuffledPool.length);
-    currentQuizSet = shuffledPool.slice(0, count);
+    currentQuizSet = shuffle([...questionPool]).slice(0, 30);
     currentQuestionIndex = 0;
     score = 0;
     startScreen.style.display = 'none';
@@ -284,59 +183,60 @@ function startQuiz() {
     showQuestion();
 }
 
-function resetQuiz(silent = false) {
-    if (silent || confirm("テストを中断して最初の画面に戻りますか？")) {
-        currentQuestionIndex = 0;
-        score = 0;
+function resetQuiz(restart = false) {
+    if (restart || confirm("テストを中断して最初の画面に戻りますか？")) {
+        startScreen.style.display = 'block';
         quizScreen.style.display = 'none';
         resultScreen.style.display = 'none';
-        startScreen.style.display = 'block';
+        currentQuestionIndex = 0;
+        score = 0;
     }
 }
 
 function showQuestion() {
     const q = currentQuizSet[currentQuestionIndex];
-    questionText.textContent = `Q${currentQuestionIndex + 1}. ${q.q}`;
-    optionsContainer.innerHTML = '';
-    feedbackArea.style.display = 'none';
-    feedbackArea.className = 'feedback';
+    questionBox.textContent = `Q${currentQuestionIndex + 1}. ${q.q}`;
+    optionsBox.innerHTML = '';
+    feedbackBox.style.display = 'none';
+    feedbackBox.className = 'feedback';
     nextBtn.classList.remove('active');
-    progressText.textContent = `問 ${currentQuestionIndex + 1} / ${currentQuizSet.length}`;
-    scoreText.textContent = `正解数: ${score}`;
+    progress.textContent = `問 ${currentQuestionIndex + 1} / 30`;
+    scoreDisplay.textContent = `正解数: ${score}`;
 
-    q.options.forEach((option, index) => {
+    q.o.forEach((option, index) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.textContent = option;
-        btn.onclick = () => checkAnswer(index, btn);
-        optionsContainer.appendChild(btn);
+        btn.onclick = () => checkAnswer(index, btn, q);
+        optionsBox.appendChild(btn);
     });
 }
 
-function checkAnswer(selectedIndex, selectedBtn) {
+function checkAnswer(selectedIndex, selectedBtn, q) {
     if (nextBtn.classList.contains('active')) return;
-    const q = currentQuizSet[currentQuestionIndex];
-    const isCorrect = (selectedIndex === q.correct);
+
+    const isCorrect = (selectedIndex === q.c);
+    const options = document.querySelectorAll('.option-btn');
+
     if (isCorrect) {
         selectedBtn.classList.add('correct');
-        feedbackArea.classList.add('feedback-correct');
-        feedbackArea.innerHTML = `<strong>正解！</strong><br>${q.rationale}<span class="source-ref">参照：${q.source}</span>`;
+        feedbackBox.innerHTML = `<strong>正解！</strong><br>${q.r}<span class="source-ref">参照：${q.s}</span>`;
+        feedbackBox.className = 'feedback';
         score++;
-        scoreText.textContent = `正解数: ${score}`;
+        scoreDisplay.textContent = `正解数: ${score}`;
     } else {
         selectedBtn.classList.add('incorrect');
-        const options = document.querySelectorAll('.option-btn');
-        options[q.correct].classList.add('correct');
-        feedbackArea.classList.add('feedback-incorrect');
-        feedbackArea.innerHTML = `<strong>不正解...</strong><br>正解は「${q.options[q.correct]}」です。<br>${q.rationale}<span class="source-ref">参照：${q.source}</span>`;
+        options[q.c].classList.add('correct');
+        feedbackBox.innerHTML = `<strong>不正解...</strong><br>正解は「${q.o[q.c]}」です。<br>${q.r}<span class="source-ref">参照：${q.s}</span>`;
+        feedbackBox.className = 'feedback error';
     }
-    feedbackArea.style.display = 'block';
+    feedbackBox.style.display = 'block';
     nextBtn.classList.add('active');
 }
 
 function nextQuestion() {
     currentQuestionIndex++;
-    if (currentQuestionIndex < currentQuizSet.length) {
+    if (currentQuestionIndex < 30) {
         showQuestion();
     } else {
         showResult();
@@ -346,22 +246,19 @@ function nextQuestion() {
 function showResult() {
     quizScreen.style.display = 'none';
     resultScreen.style.display = 'block';
-    const finalScore = document.getElementById('final-score');
-    const comment = document.getElementById('result-comment');
-    finalScore.textContent = score;
-    const percentage = (score / currentQuizSet.length) * 100;
-    if (percentage === 100) {
-        comment.textContent = "素晴らしい！全問正解です。";
-        comment.style.color = "#28a745";
-    } else if (percentage >= 80) {
-        comment.textContent = "合格レベルです！現場でも自信を持って実践できます。";
-        comment.style.color = "#0056b3";
-    } else if (percentage >= 60) {
-        comment.textContent = "まずまずの成績です。間違えた部分をPDFで復習しましょう。";
-        comment.style.color = "#856404";
-    } else {
-        comment.textContent = "もう少し復習が必要です。マニュアルを読み返してみましょう。";
-        comment.style.color = "#dc3545";
+    document.getElementById('final-score').textContent = score;
+    
+    const percentage = (score / 30) * 100;
+    let comment = "";
+    if (percentage === 100) comment = "完璧です！マニュアルを完全にマスターしています。";
+    else if (percentage >= 80) comment = "素晴らしい成績です！臨床で十分通用する知識です。";
+    else if (percentage >= 60) comment = "合格ラインです。間違えた箇所を復習しましょう。";
+    else comment = "もう少し復習が必要です。マニュアルを読み返して再挑戦しましょう。";
+    
+    const commentEl = document.getElementById('result-comment');
+    if(commentEl) {
+        commentEl.textContent = comment;
+        commentEl.style.color = percentage >= 80 ? "#27ae60" : "#e74c3c";
     }
 }
 </script>
